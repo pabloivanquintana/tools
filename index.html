@@ -28,20 +28,33 @@
     .compare-button:hover {
       background-color: #1f903a;
     }
+    .clear-button {
+      padding: 10px 20px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .clear-button:hover {
+      background-color: #b02a37;
+    }
   </style>
 </head>
 <body>
   <h1>Comparador de Archivos Excel</h1>
-  
+
   <label for="fileInput1" class="custom-button">Seleccionar Archivo 1</label>
   <input type="file" id="fileInput1" class="file-input">
-  
+
   <label for="fileInput2" class="custom-button">Seleccionar Archivo 2</label>
   <input type="file" id="fileInput2" class="file-input">
-  
+
   <button id="compareButton" class="compare-button" disabled>Comparar</button>
-  
-  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <button id="clearButton" class="clear-button">Limpiar</button>
+
+  <div id="resultContainer"></div>
+
+  <script src="xlsx.full.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
