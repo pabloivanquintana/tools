@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comparador de Archivos Excel</title>
+  <style>
+    .file-input {
+      display: none;
+    }
+    .custom-button {
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .custom-button:hover {
+      background-color: #0056b3;
+    }
+    .compare-button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .compare-button:hover {
+      background-color: #1f903a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Comparador de Archivos Excel</h1>
+  
+  <label for="fileInput1" class="custom-button">Seleccionar Archivo 1</label>
+  <input type="file" id="fileInput1" class="file-input">
+  
+  <label for="fileInput2" class="custom-button">Seleccionar Archivo 2</label>
+  <input type="file" id="fileInput2" class="file-input">
+  
+  <button id="compareButton" class="compare-button" disabled>Comparar</button>
+  
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
