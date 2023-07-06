@@ -3,17 +3,25 @@
 <head>
   <title>Comparador de Archivos Excel</title>
   <style>
+    body {
+      background-color: #9c9c9c;
+    }
     .file-input {
       display: none;
     }
     .custom-button {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 10px;
-      padding: 10px 20px;
+      padding: 6px 12px;
       background-color: #007bff;
       color: #fff;
       border: none;
       cursor: pointer;
+      font-size: 14px;
+      width: 25vw;
+      box-sizing: border-box;
     }
     .custom-button:hover {
       background-color: #0056b3;
@@ -39,18 +47,23 @@
       background-color: #b02a37;
     }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
   <h1>Comparador de Archivos Excel</h1>
 
-  <label for="fileInput1" class="custom-button">Seleccionar Archivo 1</label>
-  <input type="file" id="fileInput1" class="file-input">
+  <div>
+    <label for="fileInput1" class="custom-button"><i class="fas fa-file-upload"></i> Seleccionar Archivo 1</label>
+    <input type="file" id="fileInput1" class="file-input">
+  </div>
 
-  <label for="fileInput2" class="custom-button">Seleccionar Archivo 2</label>
-  <input type="file" id="fileInput2" class="file-input">
+  <div>
+    <label for="fileInput2" class="custom-button"><i class="fas fa-file-upload"></i> Seleccionar Archivo 2</label>
+    <input type="file" id="fileInput2" class="file-input">
+  </div>
 
-  <button id="compareButton" class="compare-button" disabled>Comparar</button>
-  <button id="clearButton" class="clear-button">Limpiar</button>
+  <button id="compareButton" class="compare-button" disabled><i class="fas fa-check-circle"></i> Comparar</button>
+  <button id="clearButton" class="clear-button"><i class="fas fa-trash-alt"></i> Limpiar</button>
 
   <div id="resultContainer"></div>
 
