@@ -56,13 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
           const data1 = XLSX.utils.sheet_to_json(worksheet1, { header: 1 });
           const data2 = XLSX.utils.sheet_to_json(worksheet2, { header: 1 });
 
-          const differences = obtenerDiferencias(data1, data2);
+          const areEqual = compararContenido(data1, data2);
 
-          if (differences.length === 0) {
+          if (areEqual) {
             const resultElement = document.createElement('p');
             resultElement.textContent = `No se encontraron diferencias en la hoja "${sheetName}".`;
             resultContainer.appendChild(resultElement);
           } else {
+            const differences = obtenerDiferencias(data1, data2);
+
             const resultElement = document.createElement('div');
             resultElement.innerHTML = `
               <p>Diferencias encontradas en la hoja "${sheetName}":</p>
@@ -91,26 +93,57 @@ document.addEventListener('DOMContentLoaded', function() {
     resultContainer.innerHTML = '';
   }
 
+  function compararContenido(data1, data2) {
+    if (data1.length !== data2.length) {
+      return false;
+    }
+
+    // Convertir las filas en conjuntos
+    const set1 = new Set(data1.map(JSON.stringify));
+    const set2 = new Set(data2.map(JSON.stringify));
+
+    // Comparar los conjuntos
+    if (set1.size !== set2.size) {
+      return false;
+    }
+
+    for (const item of set1) {
+      if (!set2.has(item)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   function obtenerDiferencias(data1, data2) {
     const differences = [];
 
     for (let i = 0; i < data1.length; i++) {
       const row1 = data1[i];
-      const row2 = data2[i];
+      const index2 = data2.findIndex(row2 => compararFilas(row1, row2));
 
-      if (row1.length !== row2.length) {
+      if (index2 === -1) {
         differences.push({ index: i, values: row1 });
-        continue;
-      }
-
-      for (let j = 0; j < row1.length; j++) {
-        if (row1[j] !== row2[j]) {
-          differences.push({ index: i, values: row1 });
-          break;
-        }
+      } else {
+        data2.splice(index2, 1);
       }
     }
 
     return differences;
+  }
+
+  function compararFilas(row1, row2) {
+    if (row1.length !== row2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < row1.length; i++) {
+      if (row1[i] !== row2[i]) {
+        return false;
+      }
+    }
+
+    return true;
   }
 });
